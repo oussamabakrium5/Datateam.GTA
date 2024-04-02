@@ -1,0 +1,6 @@
+@Datateam.UI.Api_HostAddress = http://localhost:5291
+
+GET {{Datateam.UI.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
