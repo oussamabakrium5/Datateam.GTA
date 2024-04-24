@@ -1,5 +1,4 @@
-﻿using Datateam.Foundation;
-using Datateam.Utilities;
+﻿using Datateam.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +14,9 @@ namespace Datateam.Foundation
 			}) ;
 			services.AddScoped<IGenericRepository<Tenant, EnterpriseDbContext>, GenericRepository<Tenant, EnterpriseDbContext>>();
 			services.AddScoped<ITenantService, TenantService>();
-			return services;
+            //services.AddScoped<IGenericRepository<Tenant, EnterpriseDbContext>, GenericRepository<Tenant, EnterpriseDbContext>>();
+            services.AddScoped<IOrgService, OrgService>();
+            return services;
 		}
 	}
 }

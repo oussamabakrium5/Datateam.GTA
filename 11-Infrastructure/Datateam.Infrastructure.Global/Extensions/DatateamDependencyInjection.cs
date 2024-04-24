@@ -11,7 +11,7 @@ namespace Datateam.Infrastructure
 		{
 			
 			services.AddDatateamUtilities();
-			services.AddDatateamSecurity();
+			services.AddDatateamSecurity(config);
 			services.AddDatateamFoundation(config);
 			//services.AddDatateamGTA();
 

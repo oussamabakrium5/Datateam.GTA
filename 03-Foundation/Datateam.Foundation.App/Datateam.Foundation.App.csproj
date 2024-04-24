@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\01-Utilities\Datateam.Utilities.Core\Datateam.Utilities.Core.csproj" />
+    <ProjectReference Include="..\..\02-Security\Datateam.Security.Core\Datateam.Security.Core.csproj" />
+    <ProjectReference Include="..\..\02-Security\Datateam.Security.Kernel\Datateam.Security.Kernel.csproj" />
     <ProjectReference Include="..\Datateam.Foundation.Core\Datateam.Foundation.Core.csproj" />
   </ItemGroup>
 
