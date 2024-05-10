@@ -1,0 +1,6 @@
+@Datateam.UI.YARP_HostAddress = http://localhost:5081
+
+GET {{Datateam.UI.YARP_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

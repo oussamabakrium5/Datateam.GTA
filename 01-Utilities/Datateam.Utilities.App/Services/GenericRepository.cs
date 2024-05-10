@@ -38,12 +38,21 @@ namespace Datateam.Utilities
 			//throw new NotImplementedException();
 		}
 
-		/*public async Task<TEntity> DeleteAsync(TEntity entity)
+		public async Task<TEntity?> DeleteAsync(TEntity entity)
 		{
-			_dbSet.Remove(entity);
-			await _appDbContext.SaveChangesAsync();
-			return entity;
-		}*/
+			try
+			{
+                _dbSet.Remove(entity);
+                await _appDbContext.SaveChangesAsync();
+                return entity;
+            }
+			catch (Exception ex)
+			{
+                _logger.LogError(ex.Message);
+                return null;
+            }
+			
+		}
 
 		public async Task<IQueryable<TEntity>?> FindAsync(Expression<Func<TEntity, bool>> predicate)
 		{

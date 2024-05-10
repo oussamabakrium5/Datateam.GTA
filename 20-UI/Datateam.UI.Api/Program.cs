@@ -2,6 +2,8 @@ using Datateam.Foundation;
 using Datateam.Infrastructure;
 using Datateam.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +29,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapGet("/tenant", async(ITenantService tenantService) =>
@@ -88,6 +90,24 @@ app.MapPost("/Register", async (IIAMService _iamService) =>
         return Results.Ok("Successfuly Done");
     }
     return Results.BadRequest("Something went wrong");
+});
+
+app.MapPost("/auth/login", async (LoginUser user, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) =>
+{
+    var result = await signInManager.PasswordSignInAsync(user.UserName, user.Password, false, false);
+
+    if (result.Succeeded)
+    {
+        /*var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, user.UserName ?? "no-email@example.com"), // User email claim
+                new Claim(ClaimTypes.Name, user.UserName), // Username claim
+                new Claim(ClaimTypes.Role, "User") // Default role claim (could be dynamic based on your role structure)
+            };*/
+        return Results.Ok(new { Message = "Login successful" });
+    }
+
+    return Results.Unauthorized();
 });
 
 

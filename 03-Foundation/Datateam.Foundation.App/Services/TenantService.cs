@@ -28,13 +28,24 @@ namespace Datateam.Foundation
                     tenant.ServerName = ".\\SQLExpress";
                 }
                 var createdTenant = await _tenantRepository.AddAsync(tenant);
-                var user = new RegisterUser
+                if(createdTenant is not null)
                 {
-                    Name = createdTenant.TenantName,
-                    TenantId = createdTenant.TenantId
-                };
-                await _iIAMService.RegisterUser(user);
-
+                    try
+                    {
+                        var user = new RegisterUser
+                        {
+                            Name = createdTenant.TenantName,
+                            TenantId = createdTenant.TenantId
+                        };
+                        await _iIAMService.RegisterUser(user);
+                    }
+                    catch (Exception ex)
+                    {
+                        await _tenantRepository.DeleteAsync(createdTenant);
+                    }
+                    
+                }
+                
                 return createdTenant;
             }
 			catch (Exception ex)

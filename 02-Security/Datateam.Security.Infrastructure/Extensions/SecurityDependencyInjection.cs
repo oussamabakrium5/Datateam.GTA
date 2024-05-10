@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Datateam.Security
 {
@@ -20,11 +21,14 @@ namespace Datateam.Security
                 options.UseSqlServer(config.GetSection("ConnectionStrings:SecurityConnection").Value);
             });
 
+
+
+
             /*services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<SecurityDbContext>()
                 .AddDefaultTokenProviders();*/
 
-            
+
 
             /*services.AddAuthentication(options =>
             {
@@ -46,9 +50,33 @@ namespace Datateam.Security
                 };
             });*/
 
+            /*services.AddIdentityCore<ApplicationUser>(cfg =>{});*/
+
+            /*services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+            })
+            .AddEntityFrameworkStores<SecurityDbContext>()
+            .AddDefaultTokenProviders();*/
+
+            /*services.AddScoped<UserManager<ApplicationUser>>();
+            services.AddScoped<SignInManager<ApplicationUser>>();*/
+
             services.AddIdentityApiEndpoints<ApplicationUser>()
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<SecurityDbContext>();
+                   /* .AddClaimsPrincipalFactory<AppClaimsFactory>();*/
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.Cookie.Name = "MyIdentityAuth";
+                options.LoginPath = "/auth/login";
+            });
 
             /*services.AddAuthentication().AddCookie(options =>
             {

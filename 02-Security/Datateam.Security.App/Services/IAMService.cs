@@ -70,15 +70,15 @@ namespace Datateam.Security
             {
                 var identitySuperTenantAdmin = new ApplicationUser
                 {
-                    UserName = user.Name + "SuperTenantAdmin@Datateam.com",
-                    Email = user.Name + "SuperTenantAdmin@Datateam.com",
+                    UserName = user.Name + "_SuperTenantAdmin@Datateam.com",
+                    Email = user.Name + "_SuperTenantAdmin@Datateam.com",
                     TenantId = user.TenantId,
                     OrganisationId = new Guid("00000000-0000-0000-0000-000000000000")
                 };
                 var identityTenantAdmin = new ApplicationUser
                 {
-                    UserName = user.Name + "TenantAdmin@Datateam.com",
-                    Email = user.Name + "TenantAdmin@Datateam.com",
+                    UserName = user.Name + "_TenantAdmin@Datateam.com",
+                    Email = user.Name + "_TenantAdmin@Datateam.com",
                     TenantId = user.TenantId,
                     OrganisationId = new Guid("00000000-0000-0000-0000-000000000000")
                 };
